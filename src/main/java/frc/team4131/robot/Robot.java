@@ -38,7 +38,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void drive() {
-        double straight = -controller.getY(left);
+        double straight = controller.getY(left);
         double rotate = controller.getX(right);
 
         switch (controlMode) {
@@ -46,8 +46,8 @@ public class Robot extends IterativeRobot {
                 leftOne.set(ControlMode.PercentOutput, leftJoy.getRawAxis(1));
                 leftTwo.set(ControlMode.PercentOutput, leftJoy.getRawAxis(1));
 
-                rightOne.set(ControlMode.PercentOutput, rightJoy.getRawAxis(1));
-                rightTwo.set(ControlMode.PercentOutput, rightJoy.getRawAxis(1));
+                rightOne.set(ControlMode.PercentOutput, -rightJoy.getRawAxis(1));
+                rightTwo.set(ControlMode.PercentOutput, -rightJoy.getRawAxis(1));
             case 1:
                 leftOne.set(ControlMode.PercentOutput, rotate + straight);
                 leftTwo.set(ControlMode.PercentOutput, rotate + straight);
