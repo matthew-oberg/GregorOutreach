@@ -3,3 +3,6 @@ build
 GregorOutreach.*
 .gradle/*
 .gradle
+.idea/*
+.idea
+src/main/main.iml

@@ -1,33 +1,22 @@
-package frc.team0000.robot;
+package frc.team4131.robot;
 
-import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.*;
 
 public class Robot extends IterativeRobot {
+   
     @Override
-    public void robotInit() { }
+    public void robotInit() {
+
+    }
 
     @Override
-    public void disabledInit() { }
+    public void teleopInit() {
 
-    @Override
-    public void autonomousInit() { }
-
-    @Override
-    public void teleopInit() { }
-
-    @Override
-    public void testInit() { }
+    }
 
 
     @Override
-    public void disabledPeriodic() { }
-    
-    @Override
-    public void autonomousPeriodic() { }
+    public void teleopPeriodic() {
 
-    @Override
-    public void teleopPeriodic() { }
-
-    @Override
-    public void testPeriodic() { }
+    }
 }
