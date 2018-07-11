@@ -28,34 +28,50 @@ public class Robot extends IterativeRobot {
      *Control Modes:
      *0: Joystick tank drive
      *1: Xbox arcade drive
+     *2: Single joystick arcade drive
+     *3: Xbox tank drive
      */
-    public int controlMode;
+    public int controlMode = 1;
 
     @Override
     public void teleopPeriodic() {
-        Scheduler.getInstance().run();
         drive();
     }
 
     public void drive() {
-        double straight = controller.getY(left);
-        double rotate = controller.getX(right);
 
-        switch (controlMode) {
-            case 0:
-                leftOne.set(ControlMode.PercentOutput, leftJoy.getRawAxis(1));
-                leftTwo.set(ControlMode.PercentOutput, leftJoy.getRawAxis(1));
+        if (controlMode == 0) {
+            leftOne.set(ControlMode.PercentOutput, -leftJoy.getRawAxis(1));
+            leftTwo.set(ControlMode.PercentOutput, -leftJoy.getRawAxis(1));
 
-                rightOne.set(ControlMode.PercentOutput, -rightJoy.getRawAxis(1));
-                rightTwo.set(ControlMode.PercentOutput, -rightJoy.getRawAxis(1));
-            case 1:
-                leftOne.set(ControlMode.PercentOutput, rotate + straight);
-                leftTwo.set(ControlMode.PercentOutput, rotate + straight);
+            rightOne.set(ControlMode.PercentOutput, rightJoy.getRawAxis(1));
+            rightTwo.set(ControlMode.PercentOutput, rightJoy.getRawAxis(1));
+        } else if (controlMode == 1) { 
+            double straight = -controller.getY(left);
+            double rotate = controller.getX(right);            
 
-                rightOne.set(ControlMode.PercentOutput, rotate - straight);
-                rightTwo.set(ControlMode.PercentOutput, rotate - straight);
-            default:
-                System.out.println("Error: Please enter a valid control mode!");
+            leftOne.set(ControlMode.PercentOutput, rotate + straight);
+            leftTwo.set(ControlMode.PercentOutput, rotate + straight);
+
+            rightOne.set(ControlMode.PercentOutput, rotate - straight);
+            rightTwo.set(ControlMode.PercentOutput, rotate - straight);
+        } else if (controlMode == 2) {
+            double straight = -leftJoy.getRawAxis(1);
+            double rotate = leftJoy.getRawAxis(0);
+
+            leftOne.set(ControlMode.PercentOutput, rotate + straight);
+            leftTwo.set(ControlMode.PercentOutput, rotate + straight);
+
+            rightOne.set(ControlMode.PercentOutput, rotate - straight);
+            rightTwo.set(ControlMode.PercentOutput, rotate - straight);
+        } else if (controlMode == 3) {
+            leftOne.set(ControlMode.PercentOutput, -controller.getY(left));
+            leftTwo.set(ControlMode.PercentOutput, -controller.getY(left));
+
+            rightOne.set(ControlMode.PercentOutput, controller.getY(right));
+            rightTwo.set(ControlMode.PercentOutput, controller.getY(right));
+        } else {
+            System.out.println("Error: Please enter a valid control mode!");
         }
     }
 }
