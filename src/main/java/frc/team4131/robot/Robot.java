@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.XboxController;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
@@ -35,7 +35,10 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopPeriodic() {
+
         drive();
+
+        SmartDashboard.putString("Control Mode", controlModeName());
     }
 
     public void drive() {
@@ -71,7 +74,22 @@ public class Robot extends IterativeRobot {
             rightOne.set(ControlMode.PercentOutput, controller.getY(right));
             rightTwo.set(ControlMode.PercentOutput, controller.getY(right));
         } else {
-            System.out.println("Error: Please enter a valid control mode!");
+            System.out.println("Error: Please set a valid control mode!");
+        }
+    }
+
+    public String controlModeName() {
+
+        if (controlMode == 0) {
+            return "Joystick Tank Drive";
+        } else if (controlMode == 1) {
+            return "Xbox Arcade Drive";
+        } else if (controlMode == 2) {
+            return "Single Joystick Arcade Drive";
+        } else if (controlMode == 3) {
+            return "Xbox Tank Drive";
+        } else {
+            return "Error: Invalid control mode!";
         }
     }
 }
