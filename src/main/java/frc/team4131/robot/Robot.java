@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
@@ -32,12 +32,20 @@ public class Robot extends IterativeRobot {
      *3: Xbox tank drive
      */
     public int controlMode = 1;
+    
+    String message = "Joysticks must be in ports 1 and 2, the Xbox controller must be in port 3. You can change port assaignments via the USB tab of the driverstation.";
 
+    @Override
+    public void robotInit() {
+        System.out.println(message);
+    }
+    
     @Override
     public void teleopPeriodic() {
 
         drive();
 
+        SmartDashboard.putString("IMPORTANT MESSAGE!", message);
         SmartDashboard.putString("Control Mode", controlModeName());
     }
 
