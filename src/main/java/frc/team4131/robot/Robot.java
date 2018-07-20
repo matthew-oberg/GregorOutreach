@@ -38,7 +38,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         
-        SmartDashboard.putNumber("Control Mode", -1.0);
+        SmartDashboard.putNumber("Control Mode", -1);
         System.out.println(message);
     }
     
@@ -46,7 +46,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
 
         SmartDashboard.putString("IMPORTANT MESSAGE!", message);
-        controlMode = (int)SmartDashboard.getNumber("Control Mode", -1.0);
+        controlMode = (int)SmartDashboard.getNumber("Control Mode", -1);
         
         drive();
 
@@ -101,7 +101,12 @@ public class Robot extends IterativeRobot {
         } else if (controlMode == 3) {
             return "Xbox Tank Drive";
         } else {
-            return "Error: Invalid control mode!";
+            return "Error: Invalid control mode!
+                        *Control Modes:
+                        *0: Joystick tank drive
+                        *1: Xbox arcade drive
+                        *2: Single joystick arcade drive
+                        *3: Xbox tank drive";
         }
     }
 }
