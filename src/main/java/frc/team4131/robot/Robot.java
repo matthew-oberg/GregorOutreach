@@ -101,12 +101,7 @@ public class Robot extends IterativeRobot {
         } else if (controlMode == 3) {
             return "Xbox Tank Drive";
         } else {
-            return "Error: Invalid control mode!
-                        *Control Modes:
-                        *0: Joystick tank drive
-                        *1: Xbox arcade drive
-                        *2: Single joystick arcade drive
-                        *3: Xbox tank drive";
+            return "Error: Invalid control mode!\n" + "*Control Modes:\n" + "*0: Joystick tank drive\n" + "*1: Xbox arcade drive\n" + "*2: Single joystick arcade drive\n" + "*3: Xbox tank drive";
         }
     }
 }
