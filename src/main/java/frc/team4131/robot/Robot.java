@@ -31,7 +31,9 @@ public class Robot extends IterativeRobot {
      *2: Single joystick arcade drive
      *3: Xbox tank drive
      */
-    public int controlMode;
+    int controlMode;
+    
+    boolean controlOverride;
     
     String message = "Joysticks must be in ports 1 and 2, the Xbox controller must be in port 3. You can change port assaignments via the USB tab of the driverstation.";
 
@@ -44,13 +46,17 @@ public class Robot extends IterativeRobot {
     
     @Override
     public void teleopPeriodic() {
-
-        SmartDashboard.putString("IMPORTANT MESSAGE!", message);
-        controlMode = (int)SmartDashboard.getNumber("Control Mode", -1);
+        
+        if (controlOverride) {
+            controlMode = 1;
+        } else {
+            controlMode = (int)SmartDashboard.getNumber("Control Mode", -1);
+        }
         
         drive();
 
         SmartDashboard.putString("Control Mode", controlModeName());
+        SmartDashboard.putString("IMPORTANT MESSAGE!", message);
     }
 
     public void drive() {
